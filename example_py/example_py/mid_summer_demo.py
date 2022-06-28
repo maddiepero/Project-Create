@@ -1,4 +1,4 @@
-#Wheel Chime - Publisher, Subscriber, Action Example
+#Mid Summer Demo - Bump Sound
 #Maddie Pero 
 #Project Create 
 
