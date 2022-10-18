@@ -34,14 +34,7 @@ class ColorPalette():
         self.red = LedColor(red=255, green=0, blue=0)
         self.green = LedColor(red=0, green=255, blue=0)
         self.blue = LedColor(red=0, green=0, blue=255)
-        self.yellow = LedColor(red=255, green=255, blue=0)
-        self.pink = LedColor(red=255, green=0, blue=255)
-        self.cyan = LedColor(red=0, green=255, blue=255)
-        self.purple = LedColor(red=127, green=0, blue=255)
         self.white = LedColor(red=255, green=255, blue=255)
-        self.grey = LedColor(red=189, green=189, blue=189)
-        self.tufts_blue = LedColor(red=98, green=166, blue=10)
-        self.tufts_brown = LedColor(red=94, green=75, blue=60)
 
 class LEDPublisher(Node):
     '''
