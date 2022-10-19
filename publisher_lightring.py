@@ -64,9 +64,9 @@ class LEDPublisher(Node):
         self.lightring = LightringLeds()
         self.lightring.override_system = True
 
-    def change_LED(self):
+    def change_LED(self, r=0, g=0, b=0):
       
-        self.lightring.leds = [self.cp.blue, self.cp.green, self.cp.blue, self.cp.green, self.cp.blue, self.cp.green] 
+        self.lightring.leds = [LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b)] 
         self.lights_publisher.publish(self.lightring)
 
     def reset(self):
@@ -75,8 +75,8 @@ class LEDPublisher(Node):
         '''
         print('Resetting color to white')
         self.lightring.override_system = False
-        white = [self.cp.white, self.cp.white, self.cp.white,
-                 self.cp.white, self.cp.white, self.cp.white]
+        white = [LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255),
+                 LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255)]
         self.lightring.leds = white
 
         self.lights_publisher.publish(self.lightring)
@@ -96,7 +96,7 @@ def main(args=None):
     '''
     The node is "spun" so the callbacks can be called.
     '''
-    led_publsiher.change_LED()
+    led_publsiher.change_LED(r=0,g=0,b=255)
     try:
         rclpy.spin(led_publisher)
     except KeyboardInterrupt:
