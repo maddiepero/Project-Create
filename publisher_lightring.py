@@ -24,18 +24,6 @@ Input your namespace here as a global variable.
 '''
 namespace = '[Namespace]'
 
-class ColorPalette():      
-    '''
-    This class defines a class of frequently used colors for easy access later on in the script.
-    It is essentially converting RGB values to common colors.
-    '''
-    def __init__(self):
-        print('Common colors that will be used later in the script are being initialized.')
-        self.red = LedColor(red=255, green=0, blue=0)
-        self.green = LedColor(red=0, green=255, blue=0)
-        self.blue = LedColor(red=0, green=0, blue=255)
-        self.white = LedColor(red=255, green=255, blue=255)
-
 class LEDPublisher(Node):
     '''
     The LEDPublisher class is created which is a subclass of Node.
