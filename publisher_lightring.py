@@ -22,7 +22,7 @@ from irobot_create_msgs.msg import LightringLeds
 '''
 Input your namespace here as a global variable. 
 '''
-namespace = '[Namespace]'
+namespace = 'JonSnow'
 
 class LEDPublisher(Node):
     '''
@@ -35,9 +35,6 @@ class LEDPublisher(Node):
         which is 'led_publisher.'
         '''
         super().__init__('led_publisher')
-
-        self.cp = ColorPalette()
-        
         '''
         We are declaring how we want the Node to publish message. We've imported LightringLeds
         from irobot_create_msgs.msg over the topic '/cmd_lightring' with a queue size of 10.
@@ -47,14 +44,16 @@ class LEDPublisher(Node):
         self.lights_publisher = self.create_publisher(LightringLeds, namespace + '/cmd_lightring', 10)
         
         '''
-        The timer allows the callback to execute every 2 seconds, with a counter iniitialized.
+        The timer allows the callback to execute every 2 seconds
         '''
+        timer_period = 2
+        self.timer = self.create_timer(timer_period, self.change_LED)
         self.lightring = LightringLeds()
         self.lightring.override_system = True
 
-    def change_LED(self, r=0, g=0, b=0):
-      
+    def change_LED(self, r=0, g=0, b=255):
         self.lightring.leds = [LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b), LedColor(red=r, green=g, blue=b)] 
+        print(self.lightring.leds)
         self.lights_publisher.publish(self.lightring)
 
     def reset(self):
@@ -66,9 +65,8 @@ class LEDPublisher(Node):
         white = [LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255),
                  LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255), LedColor(red=255, green=255, blue=255)]
         self.lightring.leds = white
-
+        print(self.lightring.leds)
         self.lights_publisher.publish(self.lightring)
-
 
 def main(args=None):
     '''
@@ -84,7 +82,6 @@ def main(args=None):
     '''
     The node is "spun" so the callbacks can be called.
     '''
-    led_publsiher.change_LED(r=0,g=0,b=255)
     try:
         rclpy.spin(led_publisher)
     except KeyboardInterrupt:
